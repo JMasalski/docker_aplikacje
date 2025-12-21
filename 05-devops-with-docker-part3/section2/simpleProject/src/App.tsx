@@ -16,6 +16,7 @@ function App() {
       <div className="card">
         <p>
           Jakub Masalski 225IC
+          FLY IO
         </p>
       </div>
  

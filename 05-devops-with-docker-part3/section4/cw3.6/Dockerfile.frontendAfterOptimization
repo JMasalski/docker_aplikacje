@@ -1,0 +1,21 @@
+FROM node:16
+
+WORKDIR /usr/src/app
+
+EXPOSE 5001
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
+
+RUN useradd -m appuser && \
+    npm install -g serve
+
+COPY example-frontend/package*.json ./
+RUN npm install
+
+COPY example-frontend .
+RUN npm run build && \
+    chown -R appuser /usr/src/app && \
+    npm cache clean --force
+
+USER appuser
+
+CMD ["serve", "-s", "-l", "5001", "build"]
